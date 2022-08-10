@@ -1,5 +1,5 @@
 from flask import Flask
-from mymodules import vsearch
+from mymodules.vsearch import search4letters
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def do_search() -> str:
     s = "hello world!"
     vowels = "aeiou"
    
-    return f"In '{s}' word(s) we found {vsearch.search4letters(s, vowels)} as vowel"
+    return f"In '{s}' word(s) we found {search4letters(s, vowels)} as vowel"
 
 print(help(do_search))
 app.run()
