@@ -11,9 +11,11 @@ def hello() -> str:
 
 @app.route('/search4')
 def do_search() -> str:
-    s = "Learning flask"
+    '''Return vowels found in a given string'''
+    s = "hello world!"
     res = []
-    vowels = "aeiou"
+    vowels = set("aeiou")
+    '''
     dic = {}
     for c in set(s):
         dic[c.lower()]=1
@@ -21,8 +23,8 @@ def do_search() -> str:
     for c in vowels:
         if dic.get(c):
             res.append(c)
+    '''
+    return f"In '{s}' word(s) we found {vowels.intersection(set(s))} as vowel"
 
-    return f"In '{s}' word(s) we found {len(res)} vowel(s) which is/are {','.join(res)}."
-
-
+print(help(do_search))
 app.run()
