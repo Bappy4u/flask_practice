@@ -1,4 +1,4 @@
 def search4letters(phrase:str, letters:str) -> set:
-    phrase = set(phrase)
+    phrase = set(phrase.lower())
 
-    return phrase.intersection(set(letters))
+    return phrase.intersection(set(letters.lower()))

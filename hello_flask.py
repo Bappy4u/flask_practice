@@ -1,25 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from mymodules.vsearch import search4letters
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/hello')
 def hello() -> str:
     return "Hello world from Flask!"
 
-@app.route('/entry')
+@app.route('/')
 def entry_page() -> 'html':
     return render_template('entry.html',
     the_title='Welcome to search4letters on the web!')
     
-@app.route('/search4')
+@app.route('/search4', methods=['POST'])
 def do_search() -> str:
     '''Return vowels found in a given string'''
-    s = "hello world!"
-    vowels = "aeiou"
+    phrase = request.form['phrase']
+    letters = request.form['letters']
+    results = str(search4letters(phrase, letters))
+    title = "Here is your results:"
+
    
-    return f"In '{s}' word(s) we found {search4letters(s, vowels)} as vowel"
+    return render_template('results.html',the_title=title, the_results=results, the_letters=letters, the_phrase=phrase)
 
 
-app.run()
+app.run(debug=True)
