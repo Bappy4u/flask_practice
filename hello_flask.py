@@ -4,9 +4,6 @@ from mymodules.vsearch import search4letters
 app = Flask(__name__)
 
 
-@app.route('/hello')
-def hello() -> str:
-    return "Hello world from Flask!"
 
 @app.route('/')
 def entry_page() -> 'html':
