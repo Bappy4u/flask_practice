@@ -3,7 +3,11 @@ from mymodules.vsearch import search4letters
 
 app = Flask(__name__)
 
+todos = open('todos.txt','a')
+print("Hello", file=todos)
+print("world", file=todos)
 
+todos.close()
 
 @app.route('/')
 def entry_page() -> 'html':
