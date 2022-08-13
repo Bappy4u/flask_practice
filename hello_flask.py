@@ -3,11 +3,6 @@ from mymodules.vsearch import search4letters
 
 app = Flask(__name__)
 
-todos = open('todos.txt','a')
-print("Hello", file=todos)
-print("world", file=todos)
-
-todos.close()
 
 @app.route('/')
 def entry_page() -> 'html':
@@ -22,8 +17,14 @@ def do_search() -> str:
     results = str(search4letters(phrase, letters))
     title = "Here is your results:"
 
-   
+    log_request(request, results)
     return render_template('results.html',the_title=title, the_results=results, the_letters=letters, the_phrase=phrase)
 
 
-app.run(debug=True)
+def log_request(req:'flask_request', res:str):
+    with open("todos.txt",'a') as log:
+        print(req, res, file=log)
+
+
+if __name__=='__main__':
+    app.run(debug=True)
